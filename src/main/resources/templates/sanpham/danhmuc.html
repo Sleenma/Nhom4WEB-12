@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table class="table">
+    <tr>
+        <td>STT</td>
+        <td>Mã danh mục</td>
+        <td>Tên danh mục</td>
+        <td>Hành động</td>
+    </tr>
+    <tr th:each="DanhMuc, stat : ${DanhMuc}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${DanhMuc.maDanhMuc}"></td>
+        <td th:text="${DanhMuc.tenDanhMuc}"></td>
+        <td>
+            <button type="button" onclick="editCamera(${CamSau.id})">Edit</button>
+            <button type="button" onclick="deleteCamera(${CamSau.id})">Delete</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
