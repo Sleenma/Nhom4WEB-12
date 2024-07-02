@@ -137,17 +137,17 @@
                 <table class="table">
                     <tr>
                         <td>STT</td>
-                        <td>Mã camera sau</td>
-                        <td>Tên camera sau</td>
+                        <td>Mã camera trước</td>
+                        <td>Tên camera trước</td>
                         <td>Hành động</td>
                     </tr>
-                    <tr th:each="CamSau, stat : ${CamSau}">
+                    <tr th:each="CamTruoc, stat : ${CamTruoc}">
                         <td th:text="${stat.count}"></td>
-                        <td th:text="${CamSau.maCameraSau}"></td>
-                        <td th:text="${CamSau.tenCameraSau}"></td>
+                        <td th:text="${CamTruoc.maCameraTruoc}"></td>
+                        <td th:text="${CamTruoc.tenCameraTruoc}"></td>
                         <td>
-                            <button type="button" onclick="editCamera(${CamSau.id})">Edit</button>
-                            <button type="button" onclick="deleteCamera(${CamSau.id})">Delete</button>
+                            <button type="button" onclick="editCamera(${CamTruoc.id})">Edit</button>
+                            <button type="button" onclick="deleteCamera(${CamTruoc.id})">Delete</button>
                         </td>
                     </tr>
                 </table>

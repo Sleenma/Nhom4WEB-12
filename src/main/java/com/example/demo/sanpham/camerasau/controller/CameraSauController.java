@@ -11,11 +11,11 @@ public class CameraSauController {
     @Autowired
     private CameraSauRepository cameraSauRepository;
 
-    @GetMapping("CameraSau/hienthi")
+    @GetMapping("SanPham/CameraSaus")
 
     public String hienThi(Model model) {
 
-        model.addAttribute("lists", cameraSauRepository.findAll());
+        model.addAttribute("CamSau", cameraSauRepository.findAll());
 
         return "sanpham/camerasau";
     }
