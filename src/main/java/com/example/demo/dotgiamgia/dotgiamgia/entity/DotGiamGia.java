@@ -1,4 +1,4 @@
-package com.example.demo.DotGiamGia.DotGiamGia.entity;
+package com.example.demo.dotgiamgia.dotgiamgia.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +30,7 @@ public class DotGiamGia {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "ma")
+    @Column(name = "ma", unique = true, nullable = false)
     private String ma;
 
     @Column(name = "ten")
