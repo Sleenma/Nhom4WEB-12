@@ -1,4 +1,4 @@
-package com.example.demo.TrangChu;
+package com.example.demo.trangchu;
 
 
 import org.springframework.stereotype.Controller;
