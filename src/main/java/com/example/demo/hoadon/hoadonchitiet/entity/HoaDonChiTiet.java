@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -49,10 +50,10 @@ public class HoaDonChiTiet {
     private Integer trangThai;
 
     @Column(name = "ngay_tao")
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
 
     @Column(name = "ngay_sua")
-    private Date ngaySua;
+    private LocalDateTime ngaySua;
 
     @Column(name = "nguoi_tao")
     private String nguoiTao;
