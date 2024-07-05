@@ -25,11 +25,9 @@ public class HoaDonController {
                            @RequestParam(name = "page", defaultValue = "0") Integer page,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword
     ) {
-
         model.addAttribute("keyword", keyword);
         String keyword1 = "%" + keyword + "%";
         Pageable pageable = PageRequest.of(page, 2);
-
         model.addAttribute("listHoaDon", hoaDonRepository.findByMaLikeOrTenNguoiNhanLike(keyword1, keyword1, pageable));
         return "hoadon/viewhoadon/views";
     }
