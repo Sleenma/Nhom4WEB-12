@@ -1,7 +1,5 @@
-
-
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +13,7 @@
     <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
     <link rel="stylesheet" th:href="@{/assets/css/demo.css}">
     <!-- GOOGLE FONTS -->
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
@@ -22,6 +21,7 @@
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.8.2/angular-route.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -52,16 +52,23 @@
                             <span class="badge bg-danger">5</span>
                         </a>
                         <ul class="dropdown-menu notifications">
-                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space
+                                is almost full</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9
+                                unfinished tasks</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report
+                                is available</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting
+                                in 1 hour</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request
+                                has been approved</a></li>
                             <li><a href="#" class="more">See all notifications</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="lnr lnr-question-circle"></i> <span>Help</span> <i
+                                class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Basic Use</a></li>
                             <li><a href="#">Working With Data</a></li>
@@ -70,7 +77,9 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png"
+                                                                                        class="img-circle" alt="Avatar">
+                            <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                             <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -94,7 +103,8 @@
                     <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Thông Kê</span></a></li>
                     <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Bán hàng</span></a></li>
                     <li>
-                        <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Quản lý sản phẩm</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i>
+                            <span>Quản lý sản phẩm</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages" class="collapse ">
                             <ul class="nav">
                                 <li><a href="page-profile.html" class="">Profile</a></li>
@@ -103,8 +113,10 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Quản lý khách hàng</span></a></li>
-                    <li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Quản lý nhân viên</span></a></li>
+                    <li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Quản lý khách hàng</span></a>
+                    </li>
+                    <li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i>
+                        <span>Quản lý nhân viên</span></a></li>
 
                 </ul>
             </nav>
@@ -122,23 +134,47 @@
             <!--				-->
             <!--			</div>-->
 
-            <div class="container-fluid" >
-                d132
+            <div class="container-fluid" style="background: white">
+                <div>
+                    <form th:action="@{/SanPham/CameraSaus/Add}" method="post">
+                        <input type="hidden" th:value="${csau != null ? csau.id : ''}" />
+                        <label for="tenCameraSau">Tên:</label>
+                        <input id="tenCameraSau" name="tenCameraSau" th:value="${csau != null ? csau.tenCameraSau : ''}" required />
 
-                <table>
+                        <br/>
+                        <button type="submit">Add</button>
+                    </form>
+
+<!--                    <form th:action="@{/SanPham/CameraSaus/Add}" method="post">-->
+<!--                        <input type="hidden" th:value="${csau.id}"/>-->
+<!--                        <label for="tenCameraSau">Tên:</label>-->
+<!--                        <input id="tenCameraSau" name="tenCameraSau" th:value="${csau.tenCameraSau}"required>-->
+<!--                        <br>-->
+<!--                        <button type="submit">add</button>-->
+<!--                    </form>-->
+
+                </div>
+                <table style="background: white" class="table">
+                    <thead>
                     <tr>
-                        <td></td>
+                        <th>STT</th>
+                        <th>Mã camera sau</th>
+                        <th>Tên camera sau</th>
+                        <th>Hành động</th>
                     </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cameraSau, stat : ${CamSau}">
+                        <td th:text="${stat.count + 1}"></td>
+                        <td th:text="${cameraSau.maCameraSau}"></td>
+                        <td th:text="${cameraSau.tenCameraSau}"></td>
+                        <td>
+                            <a th:href="@{/SanPham/CameraSaus/detail/{id}(id=${cameraSau.id})}"><button type="button">Detail</button></a>
+                            <a th:href="@{/SanPham/CameraSaus/remove/{id}(id=${cameraSau.id})}"><button type="button">Remove</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
                 </table>
-
-                <tr th:each="lists : ${lists}">
-                    <td th:text="${lists.ma}"></td>
-                    <td th:text="${lists.ten}"></td>
-                </tr>
-
-
-
-
             </div>
         </div>
         <!-- END MAIN CONTENT -->
@@ -146,13 +182,12 @@
     <!-- END MAIN -->
     <div class="clearfix"></div>
     <footer>
-        <div class="container-fluid">
-            <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
-        </div>
+
     </footer>
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
+
 <script src="assets/vendor/jquery/jquery.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -160,7 +195,7 @@
 <script src="assets/vendor/chartist/js/chartist.min.js"></script>
 <script src="assets/scripts/klorofil-common.js"></script>
 <script>
-    $(function() {
+    $(function () {
         var data, options;
 
         // headline charts
@@ -251,7 +286,7 @@
         // real-time pie chart
         var sysLoad = $('#system-load').easyPieChart({
             size: 130,
-            barColor: function(percent) {
+            barColor: function (percent) {
                 return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
             },
             trackColor: 'rgba(245, 245, 245, 0.8)',
@@ -263,7 +298,7 @@
 
         var updateInterval = 3000; // in milliseconds
 
-        setInterval(function() {
+        setInterval(function () {
             var randomVal;
             randomVal = getRandomInt(0, 100);
 
@@ -286,4 +321,5 @@
 <script th:src="@{/assets/vendor/chartist/js/chartist.min.js}"></script>
 <script th:src="@{/assets/scripts/klorofil-common.js}"></script>
 </body>
+
 </html>
