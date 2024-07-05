@@ -133,8 +133,9 @@
             <!--			</div>-->
 
             <div class="container-fluid">
+                <p><h2>HÓA ĐƠN CHI TIẾT</h2></p>
                 <form action="/hoa-don-chi-tiet/hien-thi" method="get">
-                    <input name="keyword" th:value="${keyword}" placeholder="Mã hoặc Tên">
+                    <input name="keyword" th:value="${keyword}" placeholder="Id hóa đơn">
                     <button type="submit">Search</button>
                 </form>
 
@@ -153,7 +154,7 @@
                         <th>Delete</th>
                         <th>Hành động</th>
                     </tr>
-                    <tr th:each="HoaDonChiTiet, index : ${listHoaDonChiTiet}">
+                    <tr th:each="HoaDonChiTiet, index : ${listHoaDonChiTiet.content}">
                         <td th:text="${index.count}"></td>
                         <td th:text="${HoaDonChiTiet.idHoaDon}"></td>
                         <td th:text="${HoaDonChiTiet.idSanPhamChiTiet}"></td>
