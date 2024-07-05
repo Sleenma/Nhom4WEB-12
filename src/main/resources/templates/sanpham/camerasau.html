@@ -13,6 +13,7 @@
     <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
     <link rel="stylesheet" th:href="@{/assets/css/demo.css}">
     <!-- GOOGLE FONTS -->
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
@@ -20,6 +21,7 @@
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.8.2/angular-route.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -132,27 +134,47 @@
             <!--				-->
             <!--			</div>-->
 
-            <div class="container-fluid">
+            <div class="container-fluid" style="background: white">
+                <div>
+                    <form th:action="@{/SanPham/CameraSaus/Add}" method="post">
+                        <input type="hidden" th:value="${csau != null ? csau.id : ''}" />
+                        <label for="tenCameraSau">Tên:</label>
+                        <input id="tenCameraSau" name="tenCameraSau" th:value="${csau != null ? csau.tenCameraSau : ''}" required />
 
-                <table class="table">
+                        <br/>
+                        <button type="submit">Add</button>
+                    </form>
+
+<!--                    <form th:action="@{/SanPham/CameraSaus/Add}" method="post">-->
+<!--                        <input type="hidden" th:value="${csau.id}"/>-->
+<!--                        <label for="tenCameraSau">Tên:</label>-->
+<!--                        <input id="tenCameraSau" name="tenCameraSau" th:value="${csau.tenCameraSau}"required>-->
+<!--                        <br>-->
+<!--                        <button type="submit">add</button>-->
+<!--                    </form>-->
+
+                </div>
+                <table style="background: white" class="table">
+                    <thead>
                     <tr>
-                        <td>STT</td>
-                        <td>Mã camera sau</td>
-                        <td>Tên camera sau</td>
-                        <td>Hành động</td>
+                        <th>STT</th>
+                        <th>Mã camera sau</th>
+                        <th>Tên camera sau</th>
+                        <th>Hành động</th>
                     </tr>
-                    <tr th:each="CamSau, stat : ${CamSau}">
-                        <td th:text="${stat.count}"></td>
-                        <td th:text="${CamSau.maCameraSau}"></td>
-                        <td th:text="${CamSau.tenCameraSau}"></td>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cameraSau, stat : ${CamSau}">
+                        <td th:text="${stat.count + 1}"></td>
+                        <td th:text="${cameraSau.maCameraSau}"></td>
+                        <td th:text="${cameraSau.tenCameraSau}"></td>
                         <td>
-                            <button type="button" onclick="editCamera(${CamSau.id})">Edit</button>
-                            <button type="button" onclick="deleteCamera(${CamSau.id})">Delete</button>
+                            <a th:href="@{/SanPham/CameraSaus/detail/{id}(id=${cameraSau.id})}"><button type="button">Detail</button></a>
+                            <a th:href="@{/SanPham/CameraSaus/remove/{id}(id=${cameraSau.id})}"><button type="button">Remove</button></a>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
-
-
             </div>
         </div>
         <!-- END MAIN CONTENT -->
@@ -160,14 +182,12 @@
     <!-- END MAIN -->
     <div class="clearfix"></div>
     <footer>
-        <div class="container-fluid">
-            <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All
-                Rights Reserved.</p>
-        </div>
+
     </footer>
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
+
 <script src="assets/vendor/jquery/jquery.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -301,4 +321,5 @@
 <script th:src="@{/assets/vendor/chartist/js/chartist.min.js}"></script>
 <script th:src="@{/assets/scripts/klorofil-common.js}"></script>
 </body>
+
 </html>

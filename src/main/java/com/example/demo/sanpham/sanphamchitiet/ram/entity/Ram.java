@@ -27,6 +27,9 @@ public class Ram {
     @Column(name = "ma_ram", unique = true, nullable = false)
     private String maRam;
 
+    @Column(name = "dung_luong")
+    private int dungLuong;
+
     @Column(name = "trang_thai")
     private int trangThai;
 }

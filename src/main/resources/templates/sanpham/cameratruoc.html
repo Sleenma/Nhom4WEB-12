@@ -132,28 +132,49 @@
             <!--				-->
             <!--			</div>-->
 
-            <div class="container-fluid">
+            <div class="container-fluid" style="background: white">
+                <div>
+                    <form th:action="@{/SanPham/CameraTruocs/Add}" method="post">
+                        <input type="hidden" th:value="${ctruoc != null ? ctruoc.id : ''}" />
+                        <label for="tenCameraTruoc">Tên:</label>
+                        <input id="tenCameraTruoc" name="tenCameraTruoc" th:value="${ctruoc != null ? ctruoc.tenCameraTruoc : ''}" required />
 
-                <table class="table">
+                        <br/>
+                        <button type="submit">Add</button>
+                    </form>
+
+                    <!--                    <form th:action="@{/SanPham/CameraSaus/Add}" method="post">-->
+                    <!--                        <input type="hidden" th:value="${csau.id}"/>-->
+                    <!--                        <label for="tenCameraSau">Tên:</label>-->
+                    <!--                        <input id="tenCameraSau" name="tenCameraSau" th:value="${csau.tenCameraSau}"required>-->
+                    <!--                        <br>-->
+                    <!--                        <button type="submit">add</button>-->
+                    <!--                    </form>-->
+
+                </div>
+                <table style="background: white" class="table">
+                    <thead>
                     <tr>
-                        <td>STT</td>
-                        <td>Mã camera trước</td>
-                        <td>Tên camera trước</td>
-                        <td>Hành động</td>
+                        <th>STT</th>
+                        <th>Mã  </th>
+                        <th>Tên  </th>
+                        <th>Hành động</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr th:each="CamTruoc, stat : ${CamTruoc}">
-                        <td th:text="${stat.count}"></td>
+                        <td th:text="${stat.count + 1}"></td>
                         <td th:text="${CamTruoc.maCameraTruoc}"></td>
                         <td th:text="${CamTruoc.tenCameraTruoc}"></td>
                         <td>
-                            <button type="button" onclick="editCamera(${CamTruoc.id})">Edit</button>
-                            <button type="button" onclick="deleteCamera(${CamTruoc.id})">Delete</button>
+                            <a th:href="@{/SanPham/CameraTruocs/detail/{id}(id=${CamTruoc.id})}"><button type="button">Detail</button></a>
+                            <a th:href="@{/SanPham/CameraTruocs/remove/{id}(id=${CamTruoc.id})}"><button type="button">Remove</button></a>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
-
-
             </div>
+        </div>
         </div>
         <!-- END MAIN CONTENT -->
     </div>
