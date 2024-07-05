@@ -26,6 +26,9 @@ public class Rom {
     @Column(name = "ma_rom", unique = true, nullable = false)
     private String maRom;
 
+    @Column(name = "dung_luong")
+    private int dungLuong;
+
     @Column(name = "trang_thai")
     private int trangThai;
 }
