@@ -48,6 +48,10 @@ public class KhachHang {
     @Column(name = "ngay_sinh")
     private String ngaySinh;
 
+    @Column(name = "email")
+    private String email;
+
+
     @Column(name = "mat_khau")
     private String matKhau;
 

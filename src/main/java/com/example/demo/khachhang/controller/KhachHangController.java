@@ -6,6 +6,8 @@ import com.example.demo.khachhang.repository.DiaCHiRepository;
 import com.example.demo.khachhang.repository.KhachHangRepository;
 import com.example.demo.khachhang.serive.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +33,28 @@ public class KhachHangController {
 
 
 
+    @GetMapping("/khachHang")
+    private String hienThi(Model model,
+                           @RequestParam(name = "page", defaultValue = "0") Integer page,
+                           @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+        model.addAttribute("keyword", keyword);
 
-    @RequestMapping("/khachHang")
-    public String hienthitatca(Model model) {
-        model.addAttribute("khachHang", khachHangRepository.findAllByDeletedTrue());
-//        model.addAttribute("khachHang", khachHangRepository.findAllKhachHangWithDiaChi());
+        String keyword1 = "%" + keyword + "%";
+        Pageable pageable = PageRequest.of(page, 5);
+        model.addAttribute("khachHang", khachHangRepository.timKhachHangTheoTenVaSDT(keyword1, keyword1,  pageable));
         return "khachhang/khachHang";
     }
 
+//
+//    @RequestMapping("/khachHang")
+//    public String hienthitatca(Model model) {
+//model.addAttribute("khachHang",khachHangRepository.findAllByDeletedTrue());
+//        return "khachhang/khachHang";
+//    }
+
     @GetMapping("/khachHang/viewadd")
     public String hienthiadd() {
+
         return "khachhang/addKhachHang";
     }
 
@@ -74,21 +88,6 @@ public class KhachHangController {
 //        khachHangRepository.timKhachHangTheoTenVaSDT(khachHang.getTenKH(), khachHang.getSdt());
 //    return "khachhang/khachHang";
 //}
-@GetMapping("/khachHang/findby")
-public String findbyTenandSdt(@RequestParam("searchQuery") String searchQuery, Model model) {
-    // Tách dữ liệu tìm kiếm vào từng phần
-    String tenKH = searchQuery;
-    String sdt = searchQuery;
-
-    // Gọi phương thức tìm kiếm từ repository
-    List<KhachHang> khachHangs = khachHangRepository.timKhachHangTheoTenVaSDT(tenKH, sdt);
-
-    // Đưa dữ liệu vào model để hiển thị ở view
-    model.addAttribute("khachHang", khachHangs);
-
-    // Trả về tên view để hiển thị kết quả tìm kiếm
-    return "khachhang/khachHang";
-}
 
 }
 

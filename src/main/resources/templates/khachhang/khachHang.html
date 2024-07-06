@@ -292,12 +292,9 @@
                     </div>
                 </div>
                 <div class="container">
-                    <form th:action="@{/khachHang/findby}" method="get">
-                        <div class="search-container">
-                            <label for="searchQuery">Tìm kiếm theo tên hoặc số điện thoại:</label>
-                            <input id="searchQuery" name="searchQuery" type="text" placeholder="Nhập tên hoặc số điện thoại" required>
-                            <button type="submit" class="btn btn-outline-primary">Tìm</button>
-                        </div>
+                    <form action="/khachHang" method="get">
+                        <input name="keyword" th:value="${keyword}" placeholder="Mã hoặc Tên hoặc SDT">
+                        <button type="submit">Search</button>
                     </form>
                         <div class="text-right">
                             <a th:href="@{/khachHang/viewadd}">
@@ -309,25 +306,26 @@
             </div>
             <table style="background: white" class="table">
                 <tr>
-                    <th>id</th>
+                    <th></th>
                     <th>ma</th>
                     <th>ten</th>
                     <th>sdt</th>
+                    <th>email</th>
                     <th>ngay sinh</th>
-                    <!--        <th>dia chi</th>-->
+
                     <th>action</th>
                 </tr>
                 <tbody>
-                <tr th:each="khachHang,index : ${khachHang}">
+                <tr th:each="khachHang,index : ${khachHang.content}">
                     <td th:text="${index.count}"></td>
                     <td th:text="${khachHang.maKH}"></td>
                     <td th:text="${khachHang.tenKH}"></td>
                     <td th:text="${khachHang.sdt}"></td>
+                    <td th:text="${khachHang.email}"></td>
                     <td th:text="${khachHang.ngaySinh}"></td>
-                    <!--        <td th:text="${khachHang.diaChi}">Địa chỉ</td>-->
+
                     <td>
-                        <!--    <a th:href="@{/khachHang/detail/${khachHang.id}}"><button>detail</button></a>-->
-                        <!--    <a th:href="@{/khachHang/remove/${khachHang.id}}"><button>remove</button></a>-->
+
                         <a th:href="@{/khachHang/detail/{id}(id=${khachHang.id})}">
                             <button type="button" class="btn btn-outline-primary">detail</button>
                         </a>
@@ -341,6 +339,20 @@
                 </tr>
                 </tbody>
             </table>
+<!--            <div class="pagination">-->
+<!--                <button th:disabled="${pageNumber == 0}"-->
+<!--                        th:onclick="'window.location.href=\'/khachHang?page=' + (${pageNumber - 1}) + '&amp;keyword=' + ${keyword}'">-->
+<!--                    Trước-->
+<!--                </button>-->
+<!--                <button th:disabled="${pageNumber == totalPages - 1}"-->
+<!--                        th:onclick="'window.location.href=\'/khachHang?page=' + (${pageNumber + 1}) + '&amp;keyword=' + ${keyword}'">-->
+<!--                    Sau-->
+<!--                </button>-->
+<!--            </div>-->
+
+
+
+
 
 
         </div>

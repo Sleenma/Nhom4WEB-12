@@ -420,12 +420,17 @@
 <!--                    <button type="submit" class="btn btn-outline-primary">update</button>-->
 <!--&lt;!&ndash;                    <button type="submit">update</button>&ndash;&gt;-->
 <!--                </form>-->
+                <form th:action="@{/khachHang/update}" method="post">
                 <div class="form-container">
                     <!-- Bên trái: 3 input -->
                     <div>
                         <div>
                             <label for="tenKH">Tên khách hàng:</label>
                             <input id="tenKH"  class="col-mb-6" name="tenKH" th:value="${listKH.tenKH}" required >
+                        </div>
+                        <div>
+                            <label for="email">Email:</label>
+                            <input id="email" class="col-mb-6" name="email" th:value="${listKH.email}" required>
                         </div>
 
                         <div>
