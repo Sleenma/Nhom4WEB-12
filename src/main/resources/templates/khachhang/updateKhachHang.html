@@ -1,0 +1,662 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Khach Hang</title>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
+<!--    <style type="text/css">-->
+<!--        .css_select_div {-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .css_select {-->
+<!--            display: inline-table;-->
+<!--            width: 25%;-->
+<!--            padding: 5px;-->
+<!--            margin: 5px 2%;-->
+<!--            border: solid 1px #686868;-->
+<!--            border-radius: 5px;-->
+<!--        }-->
+<!--    </style>-->
+
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash;    <label for="maKH">Mã khách hàng:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input id="maKH" name="maKH">&ndash;&gt;-->
+<!--<form th:action="@{/khachHang/update}" method="post">-->
+<!--<label for="tenKH">Tên khách hàng:</label>-->
+<!--<input id="tenKH" name="tenKH" th:value="${listKH.tenKH}" required>-->
+
+<!--<label for="ngaySinh">Ngày sinh:</label>-->
+<!--<input id="ngaySinh" type="date" name="ngaySinh"   th:value="${listKH.ngaySinh}" required>-->
+
+<!--<label for="sdt">Số điện thoại:</label>-->
+<!--<input id="sdt" type="number" name="sdt"  th:value="${listKH.sdt}" required>-->
+
+<!--<div class="css_select_div">-->
+<!--    <select class="css_select" id="tinh" name="diaChi.tinh" title="Chọn Tỉnh Thành">-->
+<!--        <option value="0">Tỉnh Thành</option>-->
+<!--        <option th:each="tinh : ${diaChi}" th:value="${tinh.id}" th:text="${tinh.ten}"></option>-->
+<!--    </select>-->
+<!--    </select>-->
+<!--    <select class="css_select" id="quan" name="diaChi.quan" title="Chọn Quận Huyện">-->
+<!--        <option value="0">Quận Huyện</option>-->
+<!--        <option th:each="quan : ${diaChi}" th:value="${quan.id}" th:text="${quan.ten}"></option>-->
+<!--    </select>-->
+<!--    <select class="css_select" id="phuong" name="diaChi.phuong" title="Chọn Phường Xã">-->
+<!--        <option value="0">Phường Xã</option>-->
+<!--        <option th:each="phuong : ${diaChi}" th:value="${phuong.id}" th:text="${phuong.ten}"></option>-->
+<!--    </select>-->
+<!--</div>-->
+<!--<button type="submit">update</button>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // Lấy tỉnh thành-->
+<!--        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {-->
+<!--            if (data_tinh.error == 0) {-->
+<!--                $.each(data_tinh.data, function (key_tinh, val_tinh) {-->
+<!--                    $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');-->
+<!--                });-->
+<!--                $("#tinh").change(function (e) {-->
+<!--                    var idtinh = $(this).val();-->
+<!--                    // Lấy quận huyện-->
+<!--                    $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {-->
+<!--                        if (data_quan.error == 0) {-->
+<!--                            $("#quan").html('<option value="0">Quận Huyện</option>');-->
+<!--                            $("#phuong").html('<option value="0">Phường Xã</option>');-->
+<!--                            $.each(data_quan.data, function (key_quan, val_quan) {-->
+<!--                                $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');-->
+<!--                            });-->
+<!--                            // Lấy phường xã-->
+<!--                            $("#quan").change(function (e) {-->
+<!--                                var idquan = $(this).val();-->
+<!--                                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {-->
+<!--                                    if (data_phuong.error == 0) {-->
+<!--                                        $("#phuong").html('<option value="0">Phường Xã</option>');-->
+<!--                                        $.each(data_phuong.data, function (key_phuong, val_phuong) {-->
+<!--                                            $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');-->
+<!--                                        });-->
+<!--                                    }-->
+<!--                                });-->
+<!--                            });-->
+
+<!--                        }-->
+<!--                    });-->
+<!--                });-->
+
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Khach Hang</title>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
+<!--    <style type="text/css">-->
+<!--        .css_select_div {-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .css_select {-->
+<!--            display: inline-table;-->
+<!--            width: 25%;-->
+<!--            padding: 5px;-->
+<!--            margin: 5px 2%;-->
+<!--            border: solid 1px #686868;-->
+<!--            border-radius: 5px;-->
+<!--        }-->
+<!--    </style>-->
+
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash;    <label for="maKH">Mã khách hàng:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input id="maKH" name="maKH">&ndash;&gt;-->
+<!--<form th:action="@{/khachHang/add}" method="post">-->
+<!--<label for="tenKH">Tên khách hàng:</label>-->
+<!--<input id="tenKH" name="tenKH" required>-->
+
+<!--<label for="ngaySinh">Ngày sinh:</label>-->
+<!--<input id="ngaySinh" type="date" name="ngaySinh" required>-->
+
+<!--<label for="sdt">Số điện thoại:</label>-->
+<!--<input id="sdt" type="number" name="sdt" required>-->
+
+<!--<div class="css_select_div">-->
+<!--    <select class="css_select" id="tinh" name="tinh" title="Chọn Tỉnh Thành">-->
+<!--        <option value="0">Tỉnh Thành</option>-->
+<!--    </select>-->
+<!--    <select class="css_select" id="quan" name="quan" title="Chọn Quận Huyện">-->
+<!--        <option value="0">Quận Huyện</option>-->
+<!--    </select>-->
+<!--    <select class="css_select" id="phuong" name="phuong" title="Chọn Phường Xã">-->
+<!--        <option value="0">Phường Xã</option>-->
+<!--    </select>-->
+<!--</div>-->
+<!--<button type="submit">add</button>-->
+<!--</form>-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // Lấy tỉnh thành-->
+<!--        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {-->
+<!--            if (data_tinh.error == 0) {-->
+<!--                $.each(data_tinh.data, function (key_tinh, val_tinh) {-->
+<!--                    $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');-->
+<!--                });-->
+<!--                $("#tinh").change(function (e) {-->
+<!--                    var idtinh = $(this).val();-->
+<!--                    // Lấy quận huyện-->
+<!--                    $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {-->
+<!--                        if (data_quan.error == 0) {-->
+<!--                            $("#quan").html('<option value="0">Quận Huyện</option>');-->
+<!--                            $("#phuong").html('<option value="0">Phường Xã</option>');-->
+<!--                            $.each(data_quan.data, function (key_quan, val_quan) {-->
+<!--                                $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');-->
+<!--                            });-->
+<!--                            // Lấy phường xã-->
+<!--                            $("#quan").change(function (e) {-->
+<!--                                var idquan = $(this).val();-->
+<!--                                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {-->
+<!--                                    if (data_phuong.error == 0) {-->
+<!--                                        $("#phuong").html('<option value="0">Phường Xã</option>');-->
+<!--                                        $.each(data_phuong.data, function (key_phuong, val_phuong) {-->
+<!--                                            $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');-->
+<!--                                        });-->
+<!--                                    }-->
+<!--                                });-->
+<!--                            });-->
+
+<!--                        }-->
+<!--                    });-->
+<!--                });-->
+
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">-->
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .form-container > div {
+            flex: 1;
+            margin: 0 10px;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"], select {
+            width: 100%; /* Thiết lập chiều rộng 100% */
+            padding: 5px;
+            margin: 5px 0;
+            box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến chiều rộng */
+        }
+
+        .css_select_div {
+            margin: 10px 0;
+        }
+        .col-mb-6 {
+            margin-bottom: 6px;
+        }
+
+    </style>
+    <style type="text/css">
+        .css_select_div {
+            text-align: center;
+        }
+
+        .css_select {
+            display: inline-table;
+            width: 25%;
+            padding: 5px;
+            margin: 5px 2%;
+            border: solid 1px #686868;
+            border-radius: 5px;
+        }
+    </style>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/linearicons/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/chartist/css/chartist-custom.css}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/assets/css/demo.css}">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/assets/img/favicon.png}">
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.2/angular-route.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand">
+            <!-- <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a> -->
+            PoPo
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <form class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="text" value="" class="form-control" placeholder="Search dashboard...">
+                    <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+                </div>
+            </form>
+
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                            <i class="lnr lnr-alarm"></i>
+                            <span class="badge bg-danger">5</span>
+                        </a>
+                        <ul class="dropdown-menu notifications">
+                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space
+                                is almost full</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9
+                                unfinished tasks</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report
+                                is available</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting
+                                in 1 hour</a></li>
+                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request
+                                has been approved</a></li>
+                            <li><a href="#" class="more">See all notifications</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="lnr lnr-question-circle"></i> <span>Help</span> <i
+                                class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Basic Use</a></li>
+                            <li><a href="#">Working With Data</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a href="#">Troubleshooting</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png"
+                                                                                        class="img-circle" alt="Avatar">
+                            <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+                            <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+                            <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+                            <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                        </ul>
+                    </li>
+                    <!-- <li>
+                        <a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Thông Kê</span></a></li>
+                    <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Bán hàng</span></a></li>
+                    <li>
+                        <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i>
+                            <span>Quản lý sản phẩm</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="page-profile.html" class="">Profile</a></li>
+                                <li><a href="page-login.html" class="">Login</a></li>
+                                <li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Quản lý khách hàng</span></a>
+                    </li>
+                    <li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i>
+                        <span>Quản lý nhân viên</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!--			<div class="container-fluid" ng-app="myApp">-->
+
+            <!--				<div ng-view> </div>-->
+            <!--				&lt;!&ndash; Code ở Đây &ndash;&gt;-->
+            <!--				-->
+            <!--			</div>-->
+
+            <div class="container-fluid">
+                <!-- Button trigger modal -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                <form th:action="@{/khachHang/update}" method="post">-->
+<!--                    <label for="tenKH">Tên khách hàng:</label>-->
+<!--                    <input id="tenKH" name="tenKH" th:value="${listKH.tenKH}" required>-->
+
+<!--                    <label for="ngaySinh">Ngày sinh:</label>-->
+<!--                    <input id="ngaySinh" type="date" name="ngaySinh"   th:value="${listKH.ngaySinh}" required>-->
+
+<!--                    <label for="sdt">Số điện thoại:</label>-->
+<!--                    <input id="sdt" type="number" name="sdt"  th:value="${listKH.sdt}" required>-->
+
+<!--                    <div class="css_select_div">-->
+<!--                        <select class="css_select" id="tinh" name="diaChi.tinh" title="Chọn Tỉnh Thành">-->
+<!--                            <option value="0">Tỉnh Thành</option>-->
+<!--                            <option th:each="tinh : ${diaChi}" th:value="${tinh.id}" th:text="${tinh.ten}"></option>-->
+<!--                        </select>-->
+<!--                        </select>-->
+<!--                        <select class="css_select" id="quan" name="diaChi.quan" title="Chọn Quận Huyện">-->
+<!--                            <option value="0">Quận Huyện</option>-->
+<!--                            <option th:each="quan : ${diaChi}" th:value="${quan.id}" th:text="${quan.ten}"></option>-->
+<!--                        </select>-->
+<!--                        <select class="css_select" id="phuong" name="diaChi.phuong" title="Chọn Phường Xã">-->
+<!--                            <option value="0">Phường Xã</option>-->
+<!--                            <option th:each="phuong : ${diaChi}" th:value="${phuong.id}" th:text="${phuong.ten}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-outline-primary">update</button>-->
+<!--&lt;!&ndash;                    <button type="submit">update</button>&ndash;&gt;-->
+<!--                </form>-->
+                <div class="form-container">
+                    <!-- Bên trái: 3 input -->
+                    <div>
+                        <div>
+                            <label for="tenKH">Tên khách hàng:</label>
+                            <input id="tenKH"  class="col-mb-6" name="tenKH" th:value="${listKH.tenKH}" required >
+                        </div>
+
+                        <div>
+                            <label for="ngaySinh">Ngày sinh:</label>
+                            <input id="ngaySinh" type="date" name="ngaySinh" th:value="${listKH.ngaySinh}" required>
+                        </div>
+
+                        <div>
+                            <label for="sdt">Số điện thoại:</label>
+                            <input id="sdt" type="number" name="sdt" th:value="${listKH.sdt}" required>
+                        </div>
+                    </div>
+
+                    <!-- Bên phải: 3 select -->
+                    <div>
+                        <div class="css_select_div">
+                            <label for="tinh">Tỉnh Thành:</label>
+                            <select class="css_select" id="tinh" name="diaChi.tinh" title="Chọn Tỉnh Thành">
+                                <option value="0">Tỉnh Thành</option>
+                                <option th:each="tinh : ${diaChi}" th:value="${tinh.id}" th:text="${tinh.ten}"></option>
+                            </select>
+                        </div>
+
+                        <div class="css_select_div">
+                            <label for="quan">Quận Huyện:</label>
+                            <select class="css_select" id="quan" name="diaChi.quan" title="Chọn Quận Huyện">
+                                <option value="0">Quận Huyện</option>
+                                <option th:each="quan : ${diaChi}" th:value="${quan.id}" th:text="${quan.ten}"></option>
+                            </select>
+                        </div>
+
+                        <div class="css_select_div">
+                            <label for="phuong">Phường Xã:</label>
+                            <select class="css_select" id="phuong" name="diaChi.phuong" title="Chọn Phường Xã">
+                                <option value="0">Phường Xã</option>
+                                <option th:each="phuong : ${diaChi}" th:value="${phuong.id}" th:text="${phuong.ten}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Update</button>
+                </form>
+                <script>
+                    $(document).ready(function () {
+                        // Lấy tỉnh thành
+                        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {
+                            if (data_tinh.error == 0) {
+                                $.each(data_tinh.data, function (key_tinh, val_tinh) {
+                                    $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');
+                                });
+                                $("#tinh").change(function (e) {
+                                    var idtinh = $(this).val();
+                                    // Lấy quận huyện
+                                    $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {
+                                        if (data_quan.error == 0) {
+                                            $("#quan").html('<option value="0">Quận Huyện</option>');
+                                            $("#phuong").html('<option value="0">Phường Xã</option>');
+                                            $.each(data_quan.data, function (key_quan, val_quan) {
+                                                $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');
+                                            });
+                                            // Lấy phường xã
+                                            $("#quan").change(function (e) {
+                                                var idquan = $(this).val();
+                                                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {
+                                                    if (data_phuong.error == 0) {
+                                                        $("#phuong").html('<option value="0">Phường Xã</option>');
+                                                        $.each(data_phuong.data, function (key_phuong, val_phuong) {
+                                                            $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');
+                                                        });
+                                                    }
+                                                });
+                                            });
+
+                                        }
+                                    });
+                                });
+
+                            }
+                        });
+                    });
+                </script>
+
+
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All
+                Rights Reserved.</p>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="assets/vendor/chartist/js/chartist.min.js"></script>
+<script src="assets/scripts/klorofil-common.js"></script>
+<script>
+    $(function () {
+        var data, options;
+
+        // headline charts
+        data = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series: [
+                [23, 29, 24, 40, 25, 24, 35],
+                [14, 25, 18, 34, 29, 38, 44],
+            ]
+        };
+
+        options = {
+            height: 300,
+            showArea: true,
+            showLine: false,
+            showPoint: false,
+            fullWidth: true,
+            axisX: {
+                showGrid: false
+            },
+            lineSmooth: false,
+        };
+
+        new Chartist.Line('#headline-chart', data, options);
+
+
+        // visits trend charts
+        data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            series: [{
+                name: 'series-real',
+                data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+            }, {
+                name: 'series-projection',
+                data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+            }]
+        };
+
+        options = {
+            fullWidth: true,
+            lineSmooth: false,
+            height: "270px",
+            low: 0,
+            high: 'auto',
+            series: {
+                'series-projection': {
+                    showArea: true,
+                    showPoint: false,
+                    showLine: false
+                },
+            },
+            axisX: {
+                showGrid: false,
+
+            },
+            axisY: {
+                showGrid: false,
+                onlyInteger: true,
+                offset: 0,
+            },
+            chartPadding: {
+                left: 20,
+                right: 20
+            }
+        };
+
+        new Chartist.Line('#visits-trends-chart', data, options);
+
+
+        // visits chart
+        data = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series: [
+                [6384, 6342, 5437, 2764, 3958, 5068, 7654]
+            ]
+        };
+
+        options = {
+            height: 300,
+            axisX: {
+                showGrid: false
+            },
+        };
+
+        new Chartist.Bar('#visits-chart', data, options);
+
+
+        // real-time pie chart
+        var sysLoad = $('#system-load').easyPieChart({
+            size: 130,
+            barColor: function (percent) {
+                return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
+            },
+            trackColor: 'rgba(245, 245, 245, 0.8)',
+            scaleColor: false,
+            lineWidth: 5,
+            lineCap: "square",
+            animate: 800
+        });
+
+        var updateInterval = 3000; // in milliseconds
+
+        setInterval(function () {
+            var randomVal;
+            randomVal = getRandomInt(0, 100);
+
+            sysLoad.data('easyPieChart').update(randomVal);
+            sysLoad.find('.percent').text(randomVal);
+        }, updateInterval);
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+    });
+</script>
+
+<script th:src="@{/controller/route.js}"></script>
+<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js}"></script>
+<script th:src="@{/assets/vendor/chartist/js/chartist.min.js}"></script>
+<script th:src="@{/assets/scripts/klorofil-common.js}"></script>
+</body>
+
+</html>
