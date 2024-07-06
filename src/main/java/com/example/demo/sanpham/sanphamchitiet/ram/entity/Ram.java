@@ -25,7 +25,7 @@ public class Ram {
     private UUID id;
 
     @Column(name = "ma_ram", unique = true, nullable = false)
-    private String maRam;
+    private String maRam = UUID.randomUUID().toString();
 
     @Column(name = "dung_luong")
     private int dungLuong;

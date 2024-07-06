@@ -1,4 +1,5 @@
 package com.example.demo.sanpham.sanphamchitiet.mausac.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class MauSac {
     private UUID id;
 
     @Column(name = "ma_mau_sac", unique = true, nullable = false)
-    private String maMauSac;
+    private String maMauSac = UUID.randomUUID().toString();
 
     @Column(name = "ten_mau_sac")
     private String tenMauSac;

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ROM Management</title>
+</head>
+<body>
+<h1>ROM Management</h1>
+
+<!-- Form to add or edit ROM -->
+<form th:object="${rom}" th:action="@{/SanPham/Roms/save}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>ROM ID: <input type="text" th:field="*{maRom}" readonly="readonly"/></label><br/>
+    <label>Storage Capacity: <input type="text" th:field="*{dungLuong}"/></label><br/>
+    <label>Status: <input type="text" th:field="*{trangThai}"/></label><br/>
+    <button type="submit">Save</button>
+</form>
+
+<hr/>
+
+<!-- List of ROMs -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ROM ID</th>
+        <th>Storage Capacity</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rom : ${Roms}">
+        <td th:text="${rom.maRom}"></td>
+        <td th:text="${rom.dungLuong}"></td>
+        <td th:text="${rom.trangThai}"></td>
+        <td><a th:href="@{/SanPham/Roms/edit/{id}(id=${rom.id})}">Edit</a></td>
+        <td><a th:href="@{/SanPham/Roms/delete/{id}(id=${rom.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

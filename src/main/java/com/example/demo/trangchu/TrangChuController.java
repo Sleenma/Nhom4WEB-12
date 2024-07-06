@@ -9,6 +9,6 @@ public class TrangChuController {
     @GetMapping("/")
     public String hienThi(){
 
-        return "sanpham/camerasau";
+        return "index";
     }
 }
