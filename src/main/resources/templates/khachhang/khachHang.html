@@ -296,11 +296,11 @@
                         <input name="keyword" th:value="${keyword}" placeholder="Mã hoặc Tên hoặc SDT">
                         <button type="submit">Search</button>
                     </form>
-                        <div class="text-right">
-                            <a th:href="@{/khachHang/viewadd}">
-                                <button type="button" class="btn btn-outline-primary">Add</button>
-                            </a>
-                        </div>
+                    <div class="text-right">
+                        <a th:href="@{/khachHang/viewadd}">
+                            <button type="button" class="btn btn-outline-primary">Add</button>
+                        </a>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -312,6 +312,7 @@
                     <th>sdt</th>
                     <th>email</th>
                     <th>ngay sinh</th>
+
 
                     <th>action</th>
                 </tr>
@@ -339,20 +340,48 @@
                 </tr>
                 </tbody>
             </table>
-<!--            <div class="pagination">-->
-<!--                <button th:disabled="${pageNumber == 0}"-->
-<!--                        th:onclick="'window.location.href=\'/khachHang?page=' + (${pageNumber - 1}) + '&amp;keyword=' + ${keyword}'">-->
-<!--                    Trước-->
-<!--                </button>-->
-<!--                <button th:disabled="${pageNumber == totalPages - 1}"-->
-<!--                        th:onclick="'window.location.href=\'/khachHang?page=' + (${pageNumber + 1}) + '&amp;keyword=' + ${keyword}'">-->
-<!--                    Sau-->
-<!--                </button>-->
-<!--            </div>-->
 
+            <nav aria-label="Page navigation example" style="margin-left: 30%">
+                <ul class="pagination">
+                    <li class="page-item" th:attr="aria-disabled=${khachHang.number == 0}">
+                        <a class="page-link" th:if="${khachHang.number > 0}"
+                           th:href="@{/khachHang(keyword=${keyword}, page=${khachHang.number - 1})}">Previous</a>
+                    </li>
+                    <li class="page-item" th:if="${khachHang.number == 0}">
+                        <a class="page-link" href="javascript:void(0);" aria-disabled="true">Previous</a>
+                    </li>
 
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, khachHang.totalPages - 1)}">
+                        <a class="page-link"
+                           th:if="${page == 0 or page == khachHang.totalPages - 1 or (page >= khachHang.number - 1 and page <= khachHang.number + 1 and page < khachHang.totalPages)}"
+                           th:href="@{/khachHang(keyword=${keyword}, page=${page})}"
+                           th:text="${page + 1}">1</a>
+                        <a class="page-link"
+                           th:if="${page > 1 and page < khachHang.totalPages - 1 and (page == khachHang.number - 2 or page == khachHang.number + 2)}"
+                           href="javascript:void(0);">
+                            ...
+                        </a>
+                    </li>
 
-
+                    <li class="page-item">
+                        <a class="page-link" th:if="${khachHang.number < khachHang.totalPages - 1}"
+                           th:href="@{/khachHang(keyword=${keyword}, page=${khachHang.number + 1})}">Next</a>
+                    </li>
+                    <li class="page-item" th:if="${khachHang.number >= khachHang.totalPages - 1}">
+                        <a class="page-link" href="javascript:void(0);" aria-disabled="true">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--            <div class="pagination">-->
+            <!--                <button th:disabled="${pageNumber == 0}"-->
+            <!--                        th:onclick="'window.location.href=\'/khachHang?page=' + (${pageNumber - 1}) + '&amp;keyword=' + ${keyword}'">-->
+            <!--                    Trước-->
+            <!--                </button>-->
+            <!--                <button th:disabled="${pageNumber == totalPages - 1}"-->
+            <!--                        th:onclick="'window.location.href=\'/khachHang?page=' + (${pageNumber + 1}) + '&amp;keyword=' + ${keyword}'">-->
+            <!--                    Sau-->
+            <!--                </button>-->
+            <!--            </div>-->
 
 
         </div>
