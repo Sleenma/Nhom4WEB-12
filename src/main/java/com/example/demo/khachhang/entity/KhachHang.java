@@ -70,6 +70,8 @@ public class KhachHang {
     @Column(name = "deleted")
     private Boolean deleted = true;
 
+
+
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int CODE_LENGTH = 8;
 
@@ -92,6 +94,7 @@ public class KhachHang {
         if (matKhau == null || matKhau.isEmpty()) {
             matKhau = "1"; // Default password set to "1"
         }
+//        ngayTao = new Date();
     }
 
 }

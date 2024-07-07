@@ -15,8 +15,8 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 //            "CONCAT(dc.tinhDiaChi, ', ', dc.quanDiaChi, ', ', dc.xaDiaChi)) " +
 //            "FROM KhachHang kh JOIN DiaChi dc ON kh.idDC = dc.id")
 //    List<KhachHang> findAllKhachHangWithDiaChi();
-@Query("SELECT kh FROM KhachHang kh WHERE kh.deleted = true ")
-List<KhachHang> findAllByDeletedTrue();
+//@Query("SELECT kh FROM KhachHang kh WHERE kh.deleted = true ")
+//List<KhachHang> findAllByDeletedTrue();
 //    @Query("SELECT kh.sdt, kh.maKH, kh.tenKH, kh.id FROM KhachHang kh WHERE kh.tenKH LIKE %:tenKH% AND kh.sdt LIKE %:sdt%")
 //    List<Object[]> timKhachHangTheoTenVaSDT(@Param("tenKhachHang") String tenKhachHang, @Param("soDienThoai") String soDienThoai);
 @Query("SELECT kh FROM KhachHang kh WHERE kh.deleted = true AND (kh.tenKH LIKE %:tenKH% OR kh.sdt LIKE %:sdt%)")

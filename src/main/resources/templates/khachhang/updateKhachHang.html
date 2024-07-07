@@ -423,6 +423,8 @@
                 <form th:action="@{/khachHang/update}" method="post">
                 <div class="form-container">
                     <!-- Bên trái: 3 input -->
+                    <input type="hidden"  id="id" name="id"  th:value="${listKH.id}">
+                    <input type="hidden"  id="maKH" name="maKH"  th:value="${listKH.maKH}">
                     <div>
                         <div>
                             <label for="tenKH">Tên khách hàng:</label>
@@ -449,30 +451,38 @@
                         <div class="css_select_div">
                             <label for="tinh">Tỉnh Thành:</label>
                             <select class="css_select" id="tinh" name="diaChi.tinh" title="Chọn Tỉnh Thành">
-                                <option value="0">Tỉnh Thành</option>
-                                <option th:each="tinh : ${diaChi}" th:value="${tinh.id}" th:text="${tinh.ten}"></option>
+<!--                                <option value="0">Tỉnh Thành</option>-->
+                                <option th:value="${listKH.diaChi.tinhTen}" th:text="${listKH.diaChi.tinhTen}"></option>
                             </select>
                         </div>
 
                         <div class="css_select_div">
                             <label for="quan">Quận Huyện:</label>
                             <select class="css_select" id="quan" name="diaChi.quan" title="Chọn Quận Huyện">
-                                <option value="0">Quận Huyện</option>
-                                <option th:each="quan : ${diaChi}" th:value="${quan.id}" th:text="${quan.ten}"></option>
+<!--                                <option value="0">Quận Huyện</option>-->
+                                <option th:value="${listKH.diaChi.quanTen}" th:text="${listKH.diaChi.quanTen}"></option>
                             </select>
                         </div>
 
                         <div class="css_select_div">
                             <label for="phuong">Phường Xã:</label>
-                            <select class="css_select" id="phuong" name="diaChi.phuong" title="Chọn Phường Xã">
-                                <option value="0">Phường Xã</option>
-                                <option th:each="phuong : ${diaChi}" th:value="${phuong.id}" th:text="${phuong.ten}"></option>
+                            <select class="css_select" id="phuong" name="diaChi.xa" title="Chọn Phường Xã">
+<!--                                <option value="0">Phường Xã</option>-->
+                                <option th:value="${listKH.diaChi.phuongTen}" th:text="${listKH.diaChi.phuongTen}"></option>
                             </select>
                         </div>
                     </div>
+
                 </div>
 
-                <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Update</button>
+
+                    <input type="hidden"  id="tinhTen" name="diaChi.tinhTen"  th:value="${listKH.diaChi.tinhTen}">
+                    <input type="hidden"  id="quanTen" name="diaChi.quanTen" th:value="${listKH.diaChi.quanTen}">
+                    <input  type="hidden" id="phuongTen" name="diaChi.phuongTen" th:value="${listKH.diaChi.phuongTen}">
+
+
+
+                    <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Update</button>
                 </form>
                 <script>
                     $(document).ready(function () {
@@ -482,8 +492,12 @@
                                 $.each(data_tinh.data, function (key_tinh, val_tinh) {
                                     $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');
                                 });
+
                                 $("#tinh").change(function (e) {
                                     var idtinh = $(this).val();
+                                    var tenTinh = $("#tinh option:selected").text();
+                                    $("#tinhTen").val(tenTinh);
+
                                     // Lấy quận huyện
                                     $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {
                                         if (data_quan.error == 0) {
@@ -492,27 +506,74 @@
                                             $.each(data_quan.data, function (key_quan, val_quan) {
                                                 $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');
                                             });
-                                            // Lấy phường xã
+
                                             $("#quan").change(function (e) {
                                                 var idquan = $(this).val();
+                                                var tenQuan = $("#quan option:selected").text();
+                                                $("#quanTen").val(tenQuan);
+
+                                                // Lấy phường xã
                                                 $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {
                                                     if (data_phuong.error == 0) {
                                                         $("#phuong").html('<option value="0">Phường Xã</option>');
                                                         $.each(data_phuong.data, function (key_phuong, val_phuong) {
                                                             $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');
                                                         });
+
+                                                        $("#phuong").change(function (e) {
+                                                            var tenPhuong = $("#phuong option:selected").text();
+                                                            $("#phuongTen").val(tenPhuong);
+                                                        });
                                                     }
                                                 });
                                             });
-
                                         }
                                     });
                                 });
-
                             }
                         });
                     });
                 </script>
+
+                <!--                <script>-->
+<!--                    $(document).ready(function () {-->
+<!--                        // Lấy tỉnh thành-->
+<!--                        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {-->
+<!--                            if (data_tinh.error == 0) {-->
+<!--                                $.each(data_tinh.data, function (key_tinh, val_tinh) {-->
+<!--                                    $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');-->
+<!--                                });-->
+<!--                                $("#tinh").change(function (e) {-->
+<!--                                    var idtinh = $(this).val();-->
+<!--                                    // Lấy quận huyện-->
+<!--                                    $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {-->
+<!--                                        if (data_quan.error == 0) {-->
+<!--                                            $("#quan").html('<option value="0">Quận Huyện</option>');-->
+<!--                                            $("#phuong").html('<option value="0">Phường Xã</option>');-->
+<!--                                            $.each(data_quan.data, function (key_quan, val_quan) {-->
+<!--                                                $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');-->
+<!--                                            });-->
+<!--                                            // Lấy phường xã-->
+<!--                                            $("#quan").change(function (e) {-->
+<!--                                                var idquan = $(this).val();-->
+<!--                                                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {-->
+<!--                                                    if (data_phuong.error == 0) {-->
+<!--                                                        $("#phuong").html('<option value="0">Phường Xã</option>');-->
+<!--                                                        $.each(data_phuong.data, function (key_phuong, val_phuong) {-->
+<!--                                                            $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');-->
+<!--                                                        });-->
+<!--                                                    }-->
+<!--                                                });-->
+<!--                                            });-->
+
+<!--                                        }-->
+<!--                                    });-->
+<!--                                });-->
+
+<!--                            }-->
+<!--                        });-->
+<!--                    });-->
+<!--                </script>-->
 
 
             </div>

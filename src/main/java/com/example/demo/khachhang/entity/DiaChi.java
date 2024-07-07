@@ -43,6 +43,16 @@ public class DiaChi {
     @Column(name = "xa_dia_chi")
     private String xa;
 
+    @Column(name = "ten_tinh_dia_chi")
+    private String tinhTen;
+
+    @Column(name = "ten_quan_dia_chi")
+    private String quanTen;
+
+    @Column(name = "ten_xa_dia_chi")
+    private String phuongTen;
+
+
     @Column(name = "ngay_bat_dau")
     private Date ngayTao;
 
@@ -57,6 +67,7 @@ public class DiaChi {
 
     @Column(name = "deleted")
     private Boolean deleted =true;
+
 
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -78,6 +89,7 @@ public class DiaChi {
         if (maDC == null || maDC.isEmpty()) {
             maDC = generateCode();
         }
+//        ngayTao = new Date();
     }
 
 
