@@ -125,11 +125,11 @@
     <div class="main">
         <!-- MAIN CONTENT -->
         <div class="main-content">
-
+            <p><h2>LỊCH SỬ HÓA ĐƠN</h2></p>
             <div class="container-fluid">
                 <div class="container-fluid">
-                    <form action="/hoa-don-chi-tiet/hien-thi" method="get">
-                        <input name="keyword" th:value="${keyword}" placeholder="Mã hoặc Tên">
+                    <form action="/lich-su-hoa-don/hien-thi" method="get">
+                        <input name="keyword" th:value="${keyword}" placeholder="Id hóa đơn">
                         <button type="submit">Search</button>
                     </form>
 
@@ -137,7 +137,7 @@
                     <tr>
                         <th>STT</th>
                         <th>Id hóa đơn</th>
-                        <th>Mo ta</th>
+                        <th>Mô tả</th>
                         <th>Ngày tạo</th>
                         <th>Ngày sửa</th>
                         <th>Người tạo</th>
@@ -145,7 +145,7 @@
                         <th>Delete</th>
                         <th>Hành động</th>
                     </tr>
-                    <tr th:each="LichSuHoaDon, index : ${listLichSuHoaDon}">
+                    <tr th:each="LichSuHoaDon, index : ${listLichSuHoaDon.content}">
                         <td th:text="${index.count}"></td>
                         <td th:text="${LichSuHoaDon.hoaDon.id}"></td>
                         <td th:text="${LichSuHoaDon.moTa}"></td>

@@ -133,32 +133,33 @@
             <!--			</div>-->
 
             <div class="container-fluid">
+                <p><h2>HÓA ĐƠN</h2></p>
                 <form action="/hoa-don/hien-thi" method="get">
-                    <input name="keyword" th:value="${keyword}" placeholder="Mã hoặc Tên">
+                    <input name="keyword" th:value="${keyword}" placeholder="Mã hoặc Tên hoặc SDT">
                     <button type="submit">Search</button>
                 </form>
 
                 <table class="table" border="1">
                     <tr>
                         <th>STT</th>
-                        <th>Ma</th>
-                        <th>Id nhan vien</th>
-                        <th>Id khach hang</th>
-                        <th>Id phieu giam gia</th>
+                        <th>Mã</th>
+                        <th>Id nhân viên</th>
+                        <th>Id khách hàng</th>
+                        <th>Id phiếu giảm giá</th>
                         <th>Id imei</th>
-                        <th>Hanh dong</th>
-                        <th>Ghi chu</th>
-                        <th>Trang thai</th>
-                        <th>Loai hoa don</th>
-                        <th>Tong san pham</th>
-                        <th>Tong tien</th>
-                        <th>Ten nguoi nhan</th>
-                        <th>SDT</th>
-                        <th>Dia chi</th>
-                        <th>Ngày thanh toan</th>
+                        <th>Hành độnng</th>
+                        <th>Ghi chú</th>
+                        <th>Trạng thái</th>
+                        <th>Loại hóa đơn</th>
+                        <th>Tổng sản phẩm</th>
+                        <th>Tổng tiền</th>
+                        <th>Tên người nhận</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày thanh toán</th>
                         <th>Ngày tạo</th>
                         <th>Ngày sửa</th>
-                        <th>Ngày nhan</th>
+                        <th>Ngày nhận</th>
                         <th>Người tạo</th>
                         <th>Người sửa</th>
                         <th>Delete</th>
@@ -173,7 +174,7 @@
                         <td th:text="${HoaDon.idImei}"></td>
                         <td th:text="${HoaDon.hanhDong}"></td>
                         <td th:text="${HoaDon.ghiChu}"></td>
-                        <td th:text="${HoaDon.trangThai == 1 ? 'Con han' : 'Het han'}"></td>
+                        <td th:text="${HoaDon.trangThai == 1 ? 'Còn hạn' : 'Hết hạn'}"></td>
                         <td th:text="${HoaDon.loaiHoaDon}"></td>
                         <td th:text="${HoaDon.tongSanPham}"></td>
                         <td th:text="${HoaDon.tongTien}"></td>
@@ -194,6 +195,44 @@
                     </tr>
                 </table>
 
+<!--
+<nav aria-label="Page navigation example" style="margin-left: 30%">
+    <ul class="pagination">
+        <li class="page-item" aria-disabled="true">
+            <c:if test="${page <= 0}">
+                <a class="page-link" href="/hoa-don/hien-thi?keyword=${keyword}&&page=${listHoaDon.number - 1}" aria-disabled="true">Previous</a>
+            </c:if>
+
+            <c:if test="${page != 1}">
+                <a class="page-link" href="/hoa-don/hien-thi?keyword=${keyword}&&page=${listHoaDon.number - 1}">Previous</a>
+            </c:if>
+        </li>
+
+
+        <c:forEach begin="0" end="${ listHoaDon.totalPages }" var="page">
+            <c:if test="${page == 0 ||page == listHoaDon.totalPages -1 || (page >= listHoaDon.number - 1 &&page <= listHoaDon.number + 1 &&page < listHoaDon.totalPages) }">
+                <li class="page-item">
+                    <a class="page-link" href="/hoa-don/hien-thi?keyword=${keyword}&&page=${page}"> ${page + 1}
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${page > 1 && page < listHoaDon.totalPages-1 && (page == listHoaDon.number - 2 || page == listHoaDon.number + 2 )}">
+                <li class="page-item">
+                    <a class="page-link "
+                       href="">
+                        ...
+                    </a>
+                </li>
+            </c:if>
+        </c:forEach>
+
+
+        <li class="page-item">
+            <a class="page-link" href="/hoa-don/hien-thi?keyword=${keyword}&&page=${listHoaDon.number + 1}">Next</a>
+        </li>
+    </ul>
+</nav>
+-->
             </div>
         </div>
         <!-- END MAIN CONTENT -->
